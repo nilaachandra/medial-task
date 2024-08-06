@@ -52,10 +52,10 @@ const PostCard: React.FC<PostCardProps> = ({
         <Image
           priority
           src={imageUrl}
-          width={400}
-          height={400}
+          width={1200}
+          height={630}
           alt=""
-          className="w-full h-[200px] mt-2"
+          className="w-full bg-cover bg-center  mt-2"
         />
         <p>{description}</p>
       </Link>

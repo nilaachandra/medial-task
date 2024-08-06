@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blog Post System with Dynamic OG Image Generation
 
-## Getting Started
+This project implements a blog post system with dynamic Open Graph (OG) image generation for enhanced social media sharing. The system is built using Next.js and leverages the Edge runtime for OG image creation.
 
-First, run the development server:
+## Key Components
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Post Page (`PostPage.tsx`)**: Renders individual blog posts and generates metadata.
+2. **OG Image Generator (`opengraph-image.tsx`)**: Creates dynamic Open Graph images for each post.
+3. **Static Data (`posts.ts`)**: Stores blog post data.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How It Works
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Post Page (`PostPage.tsx`)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This component is responsible for rendering individual blog posts.
 
-## Learn More
+Key features:
+- Uses `generateStaticParams` for static site generation (SSG) of all posts.
+- Implements `generateMetadata` for dynamic metadata generation, including OG image URLs.
+- Fetches post data based on the slug.
+- Renders the post content using `PostCard` component.
+- Includes a `CommentSection` component for user interactions.
 
-To learn more about Next.js, take a look at the following resources:
+### OG Image Generator (`opengraph-image.tsx`)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This file generates dynamic Open Graph images for each blog post.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Key features:
+- Utilizes Next.js `ImageResponse` for server-side image generation.
+- Creates a visually appealing image with the post's background image, title, and description.
+- Implements `generateStaticParams` to pre-generate OG images for all posts at build time.
+- Uses Edge runtime for improved performance.
 
-## Deploy on Vercel
+### Static Data (`posts.ts`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Stores an array of blog post objects, each containing:
+- `id`: Unique identifier for the post
+- `slug`: URL-friendly string for routing
+- `title`: Post title
+- `description`: Brief summary of the post
+- `image`: URL of the post's featured image
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Workflow
+
+1. When a user visits a blog post page:
+   - The `PostPage` component fetches the post data based on the slug.
+   - It renders the post content and comment section.
+   - The `generateMetadata` function creates dynamic metadata, including the OG image URL.
+
+2. When the OG image is requested (e.g., when shared on social media):
+   - The `Image` function in `opengraph-image.tsx` generates a custom image.
+   - It overlays the post title and description on the post's featured image.
+   - The image is served using Edge runtime for optimal performance.
+
+3. Static Site Generation:
+   - At build time, `generateStaticParams` in both files ensures all post pages and OG images are pre-generated.
+
+## Benefits
+
+- **SEO Optimization**: Dynamic metadata and OG images improve search engine visibility and social media sharing.
+- **Performance**: Edge runtime and static generation provide fast load times.
+- **Maintainability**: Centralized post data makes it easy to manage and update content.
+- **Scalability**: The system can handle a large number of posts efficiently.
+
+## Setup and Configuration
+
+1. Ensure all dependencies are installed (Next.js, React, etc.).
+2. Add your posts to the `posts.ts` file.
+3. Customize the OG image design in `opengraph-image.tsx` if desired.
+4. Run the build process to generate static pages and OG images.
+
+## Deployment
+
+Deploy the project to a platform that supports Next.js and Edge runtime (e.g., Vercel). The `websiteURL` in the OG image generator will automatically adjust based on the environment.
