@@ -1,6 +1,7 @@
 
-import PostCard from '@/src/components/PostCard';
-import posts, { Post } from '@/src/staticData/posts';
+
+import PostCard from '@/components/PostCard';
+import posts, { Post } from '@/staticData/posts';
 import { notFound } from 'next/navigation';
 
 type Params = {

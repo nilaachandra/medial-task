@@ -1,4 +1,4 @@
-import posts from '@/src/staticData/posts'
+import posts from '@/staticData/posts'
 import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
