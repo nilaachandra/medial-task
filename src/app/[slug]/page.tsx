@@ -1,5 +1,7 @@
 import PostCard from "@/components/PostCard";
+import { generateOgImage } from "@/lib/og-image";
 import posts, { Post } from "@/staticData/posts";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 
@@ -42,20 +44,20 @@ export default async function PostPage({ params }: PostPageProps) {
   );
 }
 
-export function generateMetadata({ params }: PostPageProps) {
-  const post = posts.find(p => p.slug === params.slug);
-  
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = await fetchPostBySlug(params.slug);
   if (!post) {
     return {};
   }
 
+  const ogImagePath = await generateOgImage(post);
+
   return {
     title: post.title,
-    description: post.description,
     openGraph: {
       title: post.title,
-      description: post.description,
-      images: [`/${params.slug}/opengraph-image`],
+      description: post.description.substring(0, 160),
+      images: [`/${post.slug}/opengraph-image`],
     },
   };
 }

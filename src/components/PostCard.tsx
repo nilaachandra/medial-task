@@ -35,6 +35,7 @@ const PostCard: React.FC<PostCardProps> = ({
         <CardTitle className="font-bold text-xl">{title}</CardTitle>
         <CardDescription>WitchCraft Media • 800 years ago</CardDescription>
         <Image
+          priority
           src={imageUrl}
           width={400}
           height={400}
