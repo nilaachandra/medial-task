@@ -33,11 +33,57 @@ export default async function Image({ params }: { params: { slug: string } }) {
 
   return new ImageResponse(
     (
-      <div tw="flex flex-col w-full h-full items-center justify-start relative bg-black relative bg-opacity-70">
-        <img src={`${websiteURL}${post.image}`} tw="absolute z-0"/>
-        <div tw="flex flex-col w-full p-4 absolute z-30 bg-black h-full bg-opacity-50">
-          <h1 tw="text-white text-7xl font-bold">{post.title}</h1>
-          <p tw="text-gray-300 text-4xl line-clamp-2">{post.description}</p>
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          backgroundImage: `url(${websiteURL}${post.image})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'flex-end',
+          padding: '20px',
+          boxSizing: 'border-box',
+          color: 'white',
+        }}
+      >
+        <div
+          style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: '100%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            padding: '20px',
+            boxSizing: 'border-box',
+            overflow: 'hidden',
+          }}
+        >
+          <h1
+            style={{
+              fontSize: '4vw', // Responsive font size
+              fontWeight: 'bold',
+              margin: 0,
+              lineHeight: '1.2',
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
+              wordBreak: 'break-word',
+            }}
+          >
+            {post.title}
+          </h1>
+          <p
+            style={{
+              fontSize: '2vw', // Responsive font size
+              margin: 0,
+              lineHeight: '1.4',
+              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)',
+              wordBreak: 'break-word',
+            }}
+          >
+            {post.description}
+          </p>
         </div>
       </div>
     ),
