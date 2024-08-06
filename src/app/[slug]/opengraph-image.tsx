@@ -15,7 +15,7 @@ export const size = {
   height: 630,
 };
 
-export const contentType = "image/jpg";
+export const contentType = "image/png";
 
 // Generate static parameters
 export async function generateStaticParams() {
