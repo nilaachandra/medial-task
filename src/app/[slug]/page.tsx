@@ -13,15 +13,18 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   if (!post) {
     return {};
   }
+
+  const timestamp = new Date().getTime(); // Current timestamp
   return {
     title: post.title,
     openGraph: {
       title: post.title,
       description: post.description.substring(0, 160),
-      images: [`/${post.slug}/opengraph-image`],
+      images: [`/${post.slug}/opengraph-image?t=${timestamp}`], // Append timestamp
     },
   };
 }
+
 
 export async function generateStaticParams() {
   return posts.map((post) => ({

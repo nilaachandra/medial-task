@@ -53,9 +53,9 @@ const PostCard: React.FC<PostCardProps> = ({
           priority
           src={imageUrl}
           width={1200}
-          height={630}
+          height={1200}
           alt=""
-          className="w-full   mt-2"
+          className="w-full mt-2"
         />
         <p>{description}</p>
       </Link>
