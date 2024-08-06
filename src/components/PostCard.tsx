@@ -15,20 +15,35 @@ import { CiBookmark } from "react-icons/ci";
 import { BsSend } from "react-icons/bs";
 import Link from "next/link";
 
-// Define the type for the props
 type PostCardProps = {
   title: string;
   description: string;
   imageUrl: string;
-  slug: string; // Add slug here
+  slug: string;
 };
 
 const PostCard: React.FC<PostCardProps> = ({
   title,
   description,
   imageUrl,
-  slug, // Add slug here
+  slug,
 }) => {
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title,
+          text: description,
+          url: window.location.origin + "/" + slug,
+        })
+        .then(() => console.log("Post shared successfully"))
+        .catch((error) => console.error("Error sharing post:", error));
+    } else {
+      // Fallback for browsers that do not support the Share API
+      alert("Sharing is not supported in your browser. Copy the URL instead.");
+    }
+  };
+
   return (
     <Card className="p-4 shadow-lg">
       <Link href={`/${slug}`}>
@@ -52,9 +67,7 @@ const PostCard: React.FC<PostCardProps> = ({
         <BsSend
           size={24}
           className="cursor-pointer"
-          onClick={() => {
-            console.log("clicked");
-          }}
+          onClick={handleShare}
         />
         <LuInfo size={24} className="cursor-pointer" />
       </div>

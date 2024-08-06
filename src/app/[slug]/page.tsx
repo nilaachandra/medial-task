@@ -1,15 +1,27 @@
 import PostCard from "@/components/PostCard";
-import { generateOgImage } from "@/lib/og-image";
 import posts, { Post } from "@/staticData/posts";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-
-
-
+import CommentSection from "@/components/CommentSection"; // A new component for comments
 
 type Params = {
   slug: string;
 };
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const post = await fetchPostBySlug(params.slug);
+  if (!post) {
+    return {};
+  }
+  return {
+    title: post.title,
+    openGraph: {
+      title: post.title,
+      description: post.description.substring(0, 160),
+      images: [`/${post.slug}/opengraph-image`],
+    },
+  };
+}
 
 export async function generateStaticParams() {
   return posts.map((post) => ({
@@ -33,31 +45,14 @@ export default async function PostPage({ params }: PostPageProps) {
   }
 
   return (
-    <div className="lg:w-1/2 w-full mx-auto p-4">
+    <div className="lg:w-1/2 w-full mx-auto">
       <PostCard
         title={post.title}
         description={post.description}
         imageUrl={post.image}
         slug={post.slug}
       />
+      <CommentSection postId={post.id} />
     </div>
   );
-}
-
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = await fetchPostBySlug(params.slug);
-  if (!post) {
-    return {};
-  }
-
-  const ogImagePath = await generateOgImage(post);
-
-  return {
-    title: post.title,
-    openGraph: {
-      title: post.title,
-      description: post.description.substring(0, 160),
-      images: [`/${post.slug}/opengraph-image`],
-    },
-  };
 }
