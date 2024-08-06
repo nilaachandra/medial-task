@@ -33,57 +33,17 @@ export default async function Image({ params }: { params: { slug: string } }) {
 
   return new ImageResponse(
     (
-      <div
-        style={{
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-          backgroundImage: `url(${websiteURL}${post.image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-end',
-          padding: '20px',
-          boxSizing: 'border-box',
-          color: 'white',
-        }}
-      >
-        <div
-          style={{
-            position: 'relative',
-            width: '100%',
-            maxWidth: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            padding: '20px',
-            boxSizing: 'border-box',
-            overflow: 'hidden',
-          }}
-        >
-          <h1
-            style={{
-              fontSize: '4vw', // Responsive font size
-              fontWeight: 'bold',
-              margin: 0,
-              lineHeight: '1.2',
-              textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
-              wordBreak: 'break-word',
-            }}
-          >
+      <div className="relative w-full h-full bg-black bg-opacity-70 flex flex-col justify-end p-4">
+        <img
+          src={`${websiteURL}${post.image}`}
+          className="absolute inset-0 w-full h-full object-cover"
+          alt=""
+        />
+        <div className="relative bg-black bg-opacity-50 p-4 text-white w-full max-w-full">
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-2">
             {post.title}
           </h1>
-          <p
-            style={{
-              fontSize: '2vw', // Responsive font size
-              margin: 0,
-              lineHeight: '1.4',
-              textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)',
-              wordBreak: 'break-word',
-            }}
-          >
-            {post.description}
-          </p>
+          <p className="text-lg md:text-2xl leading-snug">{post.description}</p>
         </div>
       </div>
     ),
