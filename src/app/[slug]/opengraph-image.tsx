@@ -35,7 +35,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
     (
       <div tw="flex flex-col w-full h-full items-center justify-start relative bg-black relative bg-opacity-70">
         <img src={`${websiteURL}${post.image}`} tw="absolute z-0"/>
-        <div tw="flex flex-col w-full p-4 absolute z-30 bg-black bg-opacity-50">
+        <div tw="flex flex-col w-full p-4 absolute z-30 bg-black h-full bg-opacity-50">
           <h1 tw="text-white text-7xl font-bold">{post.title}</h1>
           <p tw="text-gray-300 text-4xl line-clamp-2">{post.description}</p>
         </div>
