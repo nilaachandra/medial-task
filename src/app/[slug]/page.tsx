@@ -1,8 +1,9 @@
+import PostCard from "@/components/PostCard";
+import posts, { Post } from "@/staticData/posts";
+import { notFound } from "next/navigation";
 
 
-import PostCard from '@/components/PostCard';
-import posts, { Post } from '@/staticData/posts';
-import { notFound } from 'next/navigation';
+
 
 type Params = {
   slug: string;
@@ -51,5 +52,10 @@ export function generateMetadata({ params }: PostPageProps) {
   return {
     title: post.title,
     description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      images: [`/${params.slug}/opengraph-image`],
+    },
   };
 }
