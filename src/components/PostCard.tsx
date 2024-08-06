@@ -55,7 +55,7 @@ const PostCard: React.FC<PostCardProps> = ({
           width={1200}
           height={630}
           alt=""
-          className="w-full bg-cover bg-center  mt-2"
+          className="w-full   mt-2"
         />
         <p>{description}</p>
       </Link>

@@ -35,16 +35,13 @@ export default async function Image({ params }: { params: { slug: string } }) {
     (
       <div
         style={{
-          backgroundImage: `url(${websiteURL}${post.image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
+          backgroundImage: `url(${websiteURL}${post.image})`
         }}
-        tw="flex flex-col w-full h-full items-center bg-black bg-opacity-70 justify-start bg-white"
+        tw="flex flex-col w-full bg-no-repeat bg-center bg-cover h-full items-center bg-black bg-opacity-70 justify-start bg-white"
       >
         <div tw="flex flex-col w-full p-4">
-          <h1 tw="text-white text-4xl leading-none font-bold">{post.title}</h1>
-          <p tw="text-gray-300 text-xl leading-none line-clamp-2">{post.description}</p>
+          <h1 tw="text-white text-7xl leading-none font-bold">{post.title}</h1>
+          <p tw="text-gray-300 text-4xl leading-none line-clamp-2">{post.description}</p>
         </div>
       </div>
     ),
